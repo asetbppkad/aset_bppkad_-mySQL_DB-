@@ -75,14 +75,20 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '52.16.20.13', //10.91.12.82
-	'username' => 'sa', //aset
-	'password' => 'Sampang1!', //^pc$As+MGHubEs@x
+	// 'hostname' => '52.16.20.13', //10.91.12.82
+	// 'username' => 'sa', //aset
+	// 'password' => 'Sampang1!', //^pc$As+MGHubEs@x
+	// 'database' => 'aset_website',
 	// 'hostname' => 'ISMAIL-ASET\SQLASET', //10.91.12.82
 	// 'username' => 'sa', //aset
 	// 'password' => 'asetbppkad', //^pc$As+MGHubEs@x
+	// 'database' => 'aset_website_2',
+	// 'dbdriver' => 'sqlsrv',
+	'hostname' => 'localhost', //10.91.12.82
+	'username' => 'root', //aset
+	'password' => '', //^pc$As+MGHubEs@x
 	'database' => 'aset_website',
-	'dbdriver' => 'sqlsrv',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),

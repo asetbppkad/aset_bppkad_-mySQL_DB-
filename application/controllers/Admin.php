@@ -395,12 +395,12 @@ class Admin extends CI_Controller
         //             ";
         // Mengecek apakah ada verifikasi di tahun ini lalu ditambah 1 untuk dijadikan no. register
         $no_reg = $this->db->query($regQuery)->row_array();
-        // var_dump($no_reg['']);
+        // var_dump($no_reg["MAX(reg)"]);
         // die;
-        if ($no_reg[''] == NULL) {
+        if ($no_reg['MAX(reg)'] == NULL) {
             $no_reg_rslt = 1;
         } else {
-            $no_reg_rslt = $no_reg[''] + 1;
+            $no_reg_rslt = $no_reg['MAX(reg)'] + 1;
         }
         // $no_reg = $this->db->query($regQuery)->num_rows() + 1;
 

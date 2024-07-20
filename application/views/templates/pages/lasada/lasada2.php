@@ -1,7 +1,8 @@
 <script>
     async function searchBPKB() {
         const berdasar = document.getElementById('berdasar').value;
-        const kataKunci = document.getElementById('kataKunci').value;
+        const kataKunci_input = document.getElementById('kataKunci').value;
+        const kataKunci = upperCase(kataKunci_input);
         const url =
             `https://script.google.com/macros/s/AKfycbxsVHAieliT4yi36gSKgd2kjQLJzSJdF3JSp2wjCNN0eAoqFTyNGxozqwBxqARi5Xea/exec?berdasar=${berdasar}&kataKunci=${kataKunci}`; // Ganti dengan URL web app Anda
 
@@ -9,6 +10,7 @@
         const btnLoad = document.getElementById("loading");
         btnSubmit.classList.toggle('d-none');
         btnLoad.classList.toggle('d-none');
+        document.getElementById('tempatHasil').innerHTML = "";
 
         try {
             const response = await fetch(url);
@@ -66,6 +68,28 @@
             btnLoad.classList.toggle('d-none');
         }
         document.getElementById('kataKunci').value = "";
+    }
+
+    function upperCase(teks) {
+        var berdasar = document.getElementById("berdasar").value;
+
+        if (berdasar == "Nopol") {
+            // Pisahkan plat nomor menjadi bagian-bagian
+            let platNomor = teks.trim().replace(/\s+/g, "");
+            // Gunakan ekspresi reguler untuk memisahkan bagian-bagian plat nomor
+            let match = platNomor.match(/^([a-zA-Z]+)(\d+)([a-zA-Z]+)$/);
+            if (match) {
+                // Ambil bagian-bagian yang ditemukan
+                let bagian1 = match[1].toUpperCase();
+                let bagian2 = match[2];
+                let bagian3 = match[3].toUpperCase();
+                // Gabungkan kembali bagian-bagian tersebut dengan format yang diinginkan
+                let platNomorBaru = `${bagian1} ${bagian2} ${bagian3}`;
+                return platNomorBaru;
+            }
+        } else {
+            return teks;
+        }
     }
 </script>
 <style>
@@ -312,294 +336,296 @@
 
     <!--Cek KDO-->
 
-    <div class="col-md-8">
-        <style>
-            .bgText {
-                /* position: relative; */
-                animation: bgText linear 1.3s infinite;
-            }
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-md-6 col-12">
+            <style>
+                .bgText {
+                    /* position: relative; */
+                    animation: bgText linear 1.3s infinite;
+                }
 
-            @keyframes bgText {
-                0% {
-                    background: linear-gradient(0deg, #56d8e4 20%, #9f01ea 90%);
+                @keyframes bgText {
+                    0% {
+                        background: linear-gradient(0deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    12.5% {
+                        background: linear-gradient(51deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    25% {
+                        background: linear-gradient(102deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    37.5% {
+                        background: linear-gradient(154deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    50% {
+                        background: linear-gradient(205deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    62.5% {
+                        background: linear-gradient(257deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    75% {
+                        background: linear-gradient(308deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    87.5% {
+                        background: linear-gradient(320deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+
+                    100% {
+                        background: linear-gradient(360deg, #56d8e4 20%, #9f01ea 90%);
+                        width: 100%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                    }
+                }
+
+                .pesanError {
+                    background: linear-gradient(115deg, #9f01ea 30%, #56a4e4 70%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .pesanError::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -5px;
+                    /* Jarak dari teks */
                     width: 100%;
+                    height: 5px;
+                    /* Ketebalan garis */
+                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                    /* Warna garis */
+                    animation: mymove ease-in-out 1.3s infinite;
+                }
+
+                @keyframes mymove {
+                    0% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 0%;
+                    }
+
+                    12.5% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 25%;
+                    }
+
+                    25% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 50%;
+                    }
+
+                    37.5% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 75%;
+                    }
+
+                    50% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 100%;
+                    }
+
+                    62.5% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 75%;
+                    }
+
+                    75% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 50%;
+                    }
+
+                    87.5% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 25%;
+                    }
+
+                    100% {
+                        background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
+                        width: 0%;
+                    }
+                }
+
+                .neumorphism {
+                    padding-top: 5px;
+                    color: #fc007e;
+                    background-color: #e5e9f6;
+                    border-radius: 20px;
+                    box-shadow: inset 5px 5px 7px #d5d9e5,
+                        inset -5px -5px 7px #f5f9ff;
+                    caret-color: #fc007e;
+                }
+
+                .neumorphism:focus {
+                    border: none;
+                    background-color: #e5e9f6;
+                    box-shadow: 5px 5px 7px #d5d9e5,
+                        -5px -5px 7px #f5f9ff;
+                }
+
+                #cariBPKB {
+                    border-radius: 50px;
+                    color: #ffffff;
+                    background: #0076fc;
+                    box-shadow: 5px 5px 7px #d5d9e5,
+                        -5px -5px 7px #f5f9ff;
+                }
+
+                #cariBPKB:hover {
+                    box-shadow: inset 5px 5px 7px #006eea,
+                        inset -5px -5px 7px #007eff;
+                }
+
+                #cariBPKB:active {
+                    color: yellow;
+                    transform: rotate(20deg);
+                    font-weight: bold;
+                    font-size: 1em;
+                    background: #2a00fc;
+                    box-shadow: inset 5px 5px 7px #2700ea,
+                        inset -5px -5px 7px #2d00ff;
+                }
+
+                #tabelHasil {
+                    border-collapse: collapse;
+                    width: 100%;
+                    font-size: 12px;
+                }
+
+                #tabelHasil caption {
+                    text-align: center;
+                    caption-side: top;
+                    font-size: 30 px;
+                    font-weight: 600;
+                    font-family: "Poppins", sans-serif;
+                    background: -webkit-linear-gradient(right,
+                            #56d8e4,
+                            #9f01ea,
+                            #56d8e4,
+                            #9f01ea);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                 }
 
-                12.5% {
-                    background: linear-gradient(51deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                #tabelHasil th,
+                td {
+                    text-align: left;
+                    padding: 8px;
                 }
 
-                25% {
-                    background: linear-gradient(102deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                #tabelHasil td {
+                    border: 1px solid #ddd;
                 }
 
-                37.5% {
-                    background: linear-gradient(154deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                #tabelHasil tr:nth-child(even) {
+                    background-color: #f2f2f2
                 }
 
-                50% {
-                    background: linear-gradient(205deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                #tabelHasil th {
+                    background: linear-gradient(115deg, #9f01ea 10%, #56d8e4 90%);
+                    color: white;
                 }
 
-                62.5% {
-                    background: linear-gradient(257deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
+                #tabelHasil th .lebar20 {
+                    width: 20%;
                 }
-
-                75% {
-                    background: linear-gradient(308deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-
-                87.5% {
-                    background: linear-gradient(320deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-
-                100% {
-                    background: linear-gradient(360deg, #56d8e4 20%, #9f01ea 90%);
-                    width: 100%;
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                }
-            }
-
-            .pesanError {
-                background: linear-gradient(115deg, #9f01ea 30%, #56a4e4 70%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                position: relative;
-                display: inline-block;
-            }
-
-            .pesanError::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                bottom: -5px;
-                /* Jarak dari teks */
-                width: 100%;
-                height: 5px;
-                /* Ketebalan garis */
-                background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                /* Warna garis */
-                animation: mymove ease-in-out 1.3s infinite;
-            }
-
-            @keyframes mymove {
-                0% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 0%;
-                }
-
-                12.5% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 25%;
-                }
-
-                25% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 50%;
-                }
-
-                37.5% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 75%;
-                }
-
-                50% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 100%;
-                }
-
-                62.5% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 75%;
-                }
-
-                75% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 50%;
-                }
-
-                87.5% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 25%;
-                }
-
-                100% {
-                    background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-                    width: 0%;
-                }
-            }
-
-            .neumorphism {
-                padding-top: 5px;
-                color: #fc007e;
-                background-color: #e5e9f6;
-                border-radius: 20px;
-                box-shadow: inset 5px 5px 7px #d5d9e5,
-                    inset -5px -5px 7px #f5f9ff;
-                caret-color: #fc007e;
-            }
-
-            .neumorphism:focus {
-                border: none;
-                background-color: #e5e9f6;
-                box-shadow: 5px 5px 7px #d5d9e5,
-                    -5px -5px 7px #f5f9ff;
-            }
-
-            #cariBPKB {
-                border-radius: 50px;
-                color: #ffffff;
-                background: #0076fc;
-                box-shadow: 5px 5px 7px #d5d9e5,
-                    -5px -5px 7px #f5f9ff;
-            }
-
-            #cariBPKB:hover {
-                box-shadow: inset 5px 5px 7px #006eea,
-                    inset -5px -5px 7px #007eff;
-            }
-
-            #cariBPKB:active {
-                color: yellow;
-                transform: rotate(20deg);
-                font-weight: bold;
-                font-size: 1em;
-                background: #2a00fc;
-                box-shadow: inset 5px 5px 7px #2700ea,
-                    inset -5px -5px 7px #2d00ff;
-            }
-
-            #tabelHasil {
-                border-collapse: collapse;
-                width: 100%;
-                font-size: 12px;
-            }
-
-            #tabelHasil caption {
-                text-align: center;
-                caption-side: top;
-                font-size: 30 px;
-                font-weight: 600;
-                font-family: "Poppins", sans-serif;
-                background: -webkit-linear-gradient(right,
-                        #56d8e4,
-                        #9f01ea,
-                        #56d8e4,
-                        #9f01ea);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            }
-
-            #tabelHasil th,
-            td {
-                text-align: left;
-                padding: 8px;
-            }
-
-            #tabelHasil td {
-                border: 1px solid #ddd;
-            }
-
-            #tabelHasil tr:nth-child(even) {
-                background-color: #f2f2f2
-            }
-
-            #tabelHasil th {
-                background: linear-gradient(115deg, #9f01ea 10%, #56d8e4 90%);
-                color: white;
-            }
-
-            #tabelHasil th .lebar20 {
-                width: 20%;
-            }
-        </style>
-        <div class="card">
-            <div class="card-header">
-                <h4>Cek Kendaraan Dinas</h4>
-            </div>
-            <div class="card-body">
-                <form id="myFormBPKB" onsubmit="searchBPKB(); return false;">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="berdasar">
-                                <h6 class="text-label"><i class="fa fa-fw fa-id-card-o"></i> Cari Berdasarkan
-                                    <span style="color: red;">*</span>
-                                </h6>
-                            </label>
-                            <div class="position-relative">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <select id="berdasar" name="berdasar" class="form-select neumorphism">
-                                            <option value="Nopol">Nopol</option>
-                                            <option value="Nosin">Nomor Mesin</option>
-                                            <option value="Norangka">Nomor Rangka</option>
-                                        </select>
+            </style>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cek Kendaraan Dinas</h4>
+                </div>
+                <div class="card-body">
+                    <form id="myFormBPKB" onsubmit="searchBPKB(); return false;">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="berdasar">
+                                    <h6 class="text-label"><i class="fa fa-fw fa-id-card-o"></i> Cari Berdasarkan
+                                        <span style="color: red;">*</span>
+                                    </h6>
+                                </label>
+                                <div class="position-relative">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <select id="berdasar" name="berdasar" class="form-select neumorphism">
+                                                <option value="Nopol">Nopol</option>
+                                                <option value="Nosin">Nomor Mesin</option>
+                                                <option value="Norangka">Nomor Rangka</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control neumorphism" placeholder="Masukkan Nopol ..." id="kataKunci" name="kataKunci" required autocomplete="off">
+                                        </div>
+                                        <script>
+                                            document.getElementById("berdasar").addEventListener("change", function() {
+                                                var selectedOption = this.options[this.selectedIndex].value;
+                                                if (selectedOption == "Nopol") {
+                                                    var isi = "Nopol";
+                                                } else if (selectedOption == "Nosin") {
+                                                    var isi = "Nomor Mesin";
+                                                } else {
+                                                    var isi = "Nomor Rangka";
+                                                }
+                                                document.getElementById("kataKunci").placeholder = "Masukkan " +
+                                                    isi + " ...";
+                                            });
+                                        </script>
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control neumorphism" placeholder="Masukkan Nopol ..." id="kataKunci" name="kataKunci" required>
-                                    </div>
-                                    <script>
-                                        document.getElementById("berdasar").addEventListener("change", function() {
-                                            var selectedOption = this.options[this.selectedIndex].value;
-                                            if (selectedOption == "Nopol") {
-                                                var isi = "Nopol";
-                                            } else if (selectedOption == "Nosin") {
-                                                var isi = "Nomor Mesin";
-                                            } else {
-                                                var isi = "Nomor Rangka";
-                                            }
-                                            document.getElementById("kataKunci").placeholder = "Masukkan " +
-                                                isi + " ...";
-                                        });
-                                    </script>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 d-flex justify-content-end">
-                        <button type="submit" class="btn" id="cariBPKB">
-                            <span><i class="fa fa-fw fa-search"></i> Cari</span>
-                        </button>
-                        <button type="button" class="btn btn-info d-none" id="loading" style="border-radius: 20px;" disabled>
-                            <span><i class="fa fa-spin fa-fw fa-spinner"></i> Loading</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div id="tempatHasil" class="card-footer" style="overflow-x:auto;">
-                <!-- tempat hasil -->
+                        <div class="col-md-12 d-flex justify-content-end">
+                            <button type="submit" class="btn" id="cariBPKB">
+                                <span><i class="fa fa-fw fa-search"></i> Cari</span>
+                            </button>
+                            <button type="button" class="btn btn-info d-none" id="loading" style="border-radius: 20px;" disabled>
+                                <span><i class="fa fa-spin fa-fw fa-spinner"></i> Loading</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="tempatHasil" class="card-footer" style="overflow-x:auto;">
+                    <!-- tempat hasil -->
+                </div>
             </div>
         </div>
     </div>
 
     <!--/Cek KDO-->
 
-    <!-- <script>
+    <script>
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault(); // Mencegah aksi default saat klik kanan
         });
-    </script> -->
+    </script>
