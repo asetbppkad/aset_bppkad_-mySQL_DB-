@@ -4,7 +4,7 @@
         const kataKunci_input = document.getElementById('kataKunci').value;
         const kataKunci = upperCase(kataKunci_input);
         const url =
-            `https://script.google.com/macros/s/AKfycbxsVHAieliT4yi36gSKgd2kjQLJzSJdF3JSp2wjCNN0eAoqFTyNGxozqwBxqARi5Xea/exec?berdasar=${berdasar}&kataKunci=${kataKunci}`; // Ganti dengan URL web app Anda
+            `https://script.google.com/macros/s/AKfycbxD2HgdjbtuHFbUTz69xftZZOm6O5QBbNulLGFxKp48W5Dd4lotgF1gZsLbh_4pJOiLng/exec?berdasar=${berdasar}&kataKunci=${kataKunci}`; // Ganti dengan URL web app Anda
 
         const btnSubmit = document.getElementById("cariBPKB");
         const btnLoad = document.getElementById("loading");
@@ -53,6 +53,10 @@
                                                         <th class="lebar20">Pemegang</td>
                                                         <td>${data.pemegang}</td>
                                                         <td>${data.jabatan}</td>
+                                                    </tr>
+													<tr>
+                                                        <th class="lebar20">Lokasi</td>
+                                                        <td colspan="2">${data.lokasi}</td>
                                                     </tr>
                                                 </table>`;
                 document.getElementById('tempatHasil').innerHTML = dataHasil;
